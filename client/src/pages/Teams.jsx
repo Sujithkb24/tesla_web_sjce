@@ -19,7 +19,7 @@ const Teams = () => {
       <div><TeamCarousel /></div>
 
       {/* Meet the Team Section */}
-      <div>
+      <div className='w-full'>
         <TeamMembers/>
       </div>
 

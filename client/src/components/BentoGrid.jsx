@@ -1,26 +1,33 @@
 import React from "react";
 
 const images = [
-  "/Tesla_photos/Bento_Grid_3.jpg",
-  "/Tesla_photos/Bento_Grid_2.JPG",
-  "/Tesla_photos/Bento_Grid_4.jpg",
-  "/Tesla_photos/Bento_Grid_1.png",
-  "/Tesla_photos/Bento_Grid_6.png",
-  "/Tesla_photos/Bento_Grid_7.png",
-  "/Tesla_photos/Bento_Grid_5.jpg",
-  "/Tesla_photos/Tesla_group.JPG",
-  "/Tesla_photos/Bento_Grid_8.JPG"
+  "/Tesla_photos/Bento_Grid_3.webp",
+  "/Tesla_photos/Bento_Grid_2.webp",
+  "/Tesla_photos/Bento_Grid_4.webp",
+  "/Tesla_photos/Bento_Grid_1.webp",
+  "/Tesla_photos/Bento_Grid_6.webp",
+  "/Tesla_photos/Bento_Grid_7.webp",
+  "/Tesla_photos/Bento_Grid_5.webp",
+  "/Tesla_photos/Tesla_group.webp",
+  "/Tesla_photos/Bento_Grid_8.webp"
 ];
 
 export default function BentoGrid() {
   return (
     <div 
-      className="bg-black min-h-screen flex items-center justify-center p-2"
-      style={{ height: "100dvh", minHeight: "100dvh" }}
+      className="min-h-screen flex items-center justify-center p-2"
+      style={{ 
+        backgroundColor: "var(--color-bg-black)", 
+        height: "100dvh", 
+        minHeight: "100dvh" 
+      }}
     >
       <div 
-        className="bg-slate-200 p-2 sm:p-4 rounded-xl w-full max-w-[1200px]"
-        style={{ height: "90dvh" }}
+        className="p-2 sm:p-4 rounded-xl w-full max-w-[1200px]"
+        style={{ 
+          backgroundColor: "var(--color-bg-slate-200)", 
+          height: "90dvh" 
+        }}
       >
         <div className="grid grid-cols-4 grid-rows-4 gap-2 sm:gap-4 w-full h-full">
           {/* Row 1 */}

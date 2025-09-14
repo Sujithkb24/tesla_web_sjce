@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+:root {
+  --color-gold: #C9A154;
+  --color-light-gold: #DAA520;
+  --color-gold-ring: #D4AF37;
+  --color-black: #000000;
+  --color-gray: #4B5563;
+  --color-dark-gray: #111;
+  --color-bg-slate-200: #E2E8F0;
+  --color-white: #ffffff;
+  --color-red: #ef4444; /* Tailwind's red-500 */
+}
+
 body {
   margin: 0;
   padding: 0;

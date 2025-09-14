@@ -16,6 +16,7 @@ import InitialSection from './components/InitialSection';
 // import Events from "./components/Events/Events"
 import AboutUs from './components/AboutUs';
 import Events from './pages/Events';
+import ScrollToTop from './components/ScrollToTop';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
   return (
     <BrowserRouter>
       <AnimatePresence mode="sync">
+        <ScrollToTop />
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/teams" element={<Teams />} />

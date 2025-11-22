@@ -11,4 +11,8 @@ export default defineConfig({
   server: {
     host: '0.0.0.0', // Make it accessible to all devices in your network
   },
+   build: {
+    outDir: 'dist',   // output files will go to client/dist
+    emptyOutDir: true,
+  },
 })

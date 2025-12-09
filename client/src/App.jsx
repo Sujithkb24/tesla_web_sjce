@@ -1,25 +1,25 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import TeamsSection from './components/TeamsSection';
-import ElectroSection from './components/ElectroSection';
-import TeamCarousel from './components/TeamCarousel';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import TeamsSection from "./components/TeamsSection";
+import ElectroSection from "./components/ElectroSection";
+import TeamCarousel from "./components/TeamCarousel";
 
-import Home from './pages/Home';
-import Teams from './pages/Teams';
-import Footer from './components/Footer';
-import Navbar from './components/Navbar';
-import MeetTheTeam from './components/MeetTheTeam';
-import TeamsHero from './components/TeamsHero';
-import InitialSection from './components/InitialSection';
+import Home from "./pages/Home";
+import Teams from "./pages/Teams";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import MeetTheTeam from "./components/MeetTheTeam";
+import TeamsHero from "./components/TeamsHero";
+import InitialSection from "./components/InitialSection";
 // import Events from "./components/Events/Events"
-import AboutUs from './components/AboutUs';
-import Events from './pages/Events';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import ScrollToTop from './components/ScrollToTop';
-
+import AboutUs from "./components/AboutUs";
+import Events from "./pages/Events";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import ScrollToTop from "./components/ScrollToTop";
+import Registration from "./pages/Registration";
 
 function App() {
   // const [array, setArray] = useState([]);
@@ -52,13 +52,11 @@ function App() {
           <Route path="/init" element={<InitialSection />} />
           <Route path="/events" element={<Events />} />
           <Route path="/about" element={<AboutUs />} />
-
-
+          <Route path="/registration" element={<Registration />} />
         </Routes>
       </AnimatePresence>
     </BrowserRouter>
   );
 }
-
 
 export default App;

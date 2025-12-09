@@ -16,7 +16,8 @@ const Navbar = () => {
     { name: "Events", path: "/events" },
     { name: "Blog", path: "/blog" },
     { name: "Teams", path: "/teams" },
-    { name: "Contact", path: "#footer" }, // Scroll to footer
+    { name: "Contact", path: "#footer" },
+    { name: "Registration", path: "/registration" }, // Scroll to footer
   ];
 
   const handleNavClick = (name, path) => {
@@ -53,7 +54,9 @@ const Navbar = () => {
     <nav className="fixed left-1/2 transform -translate-x-1/2 w-[100%] max-w-[100%] bg-white/20 backdrop-blur-3xl shadow-xl p-3 h-16 z-50 flex justify-between items-center">
       <Link to="/" className="flex items-center space-x-3">
         <img src={logo} alt="TESLA-SJCE Logo" className="h-10 sm:h-12" />
-        <span className="text-white text-xl sm:text-2xl font-bold hidden lg:block">TESLA-SJCE</span>
+        <span className="text-white text-xl sm:text-2xl font-bold hidden lg:block">
+          TESLA-SJCE
+        </span>
       </Link>
       {/* Desktop Nav (hidden below 792px) */}
       <ul className="hidden lg:flex space-x-6">
@@ -68,11 +71,14 @@ const Navbar = () => {
                    -2px -2px 8px rgba(0, 0, 0, 0.9)
                 `,
               }}
-            > 
+            >
               {name}
               <span
-                className={`absolute left-1/2 bottom-0 h-[3px] bg-gradient-to-r from-yellow-400 to-yellow-600 rounded transition-all duration-300 transform translate-x-[-50%] ${pathname === path ? "scale-x-100" : "group-hover:scale-x-100 scale-x-0"
-                  }`}
+                className={`absolute left-1/2 bottom-0 h-[3px] bg-gradient-to-r from-yellow-400 to-yellow-600 rounded transition-all duration-300 transform translate-x-[-50%] ${
+                  pathname === path
+                    ? "scale-x-100"
+                    : "group-hover:scale-x-100 scale-x-0"
+                }`}
                 style={{ width: "90%" }}
               ></span>
             </button>
@@ -89,24 +95,30 @@ const Navbar = () => {
         }}
       >
         <div
-          className={`w-8 h-1 bg-white rounded transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""
-            }`}
+          className={`w-8 h-1 bg-white rounded transition-all duration-300 ${
+            menuOpen ? "rotate-45 translate-y-2" : ""
+          }`}
         ></div>
         <div
-          className={`w-8 h-1 bg-white rounded transition-all duration-300 my-1 ${menuOpen ? "opacity-0" : ""
-            }`}
+          className={`w-8 h-1 bg-white rounded transition-all duration-300 my-1 ${
+            menuOpen ? "opacity-0" : ""
+          }`}
         ></div>
         <div
-          className={`w-8 h-1 bg-white rounded transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""
-            }`}
+          className={`w-8 h-1 bg-white rounded transition-all duration-300 ${
+            menuOpen ? "-rotate-45 -translate-y-2" : ""
+          }`}
         ></div>
       </button>
 
       {/* Mobile Menu (visible below 792px) */}
       <div
         ref={menuRef}
-        className={`fixed top-[72px] left-1/2 transform -translate-x-1/2 w-[90%] max-w-[1200px] bg-black/90 backdrop-blur-lg rounded-2xl p-4 shadow-lg transition-all duration-300 ease-in-out ${menuOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"
-          }`}
+        className={`fixed top-[72px] left-1/2 transform -translate-x-1/2 w-[90%] max-w-[1200px] bg-black/90 backdrop-blur-lg rounded-2xl p-4 shadow-lg transition-all duration-300 ease-in-out ${
+          menuOpen
+            ? "opacity-100 scale-100 pointer-events-auto"
+            : "opacity-0 scale-95 pointer-events-none"
+        }`}
       >
         <ul className="flex flex-col items-center space-y-6">
           {navItems.map(({ name, path }) => (
@@ -117,8 +129,11 @@ const Navbar = () => {
               >
                 {name}
                 <span
-                  className={`absolute left-1/2 bottom-0 h-[3px] bg-gradient-to-r from-yellow-400 to-yellow-600 rounded transition-all duration-300 transform translate-x-[-50%] ${pathname === path ? "scale-x-100" : "group-hover:scale-x-100 scale-x-0"
-                    }`}
+                  className={`absolute left-1/2 bottom-0 h-[3px] bg-gradient-to-r from-yellow-400 to-yellow-600 rounded transition-all duration-300 transform translate-x-[-50%] ${
+                    pathname === path
+                      ? "scale-x-100"
+                      : "group-hover:scale-x-100 scale-x-0"
+                  }`}
                   style={{ width: "90%" }}
                 ></span>
               </button>

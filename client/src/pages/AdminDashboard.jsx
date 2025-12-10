@@ -29,7 +29,7 @@ const filteredTeams = teams.filter((team) =>
         }
         setTeams(data.data || []);
       } catch (err) {
-        setError(err);
+       console.log(err);
       } finally {
         setLoading(false);
       }

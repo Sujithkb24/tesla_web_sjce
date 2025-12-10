@@ -1,8 +1,8 @@
 // AdminDashboard.jsx
 import React, { useEffect, useState } from "react";
 
-const API_BASE_URL = "http://localhost:5000/api";
 
+const BACKEND_URL = import.meta.env.VERCEL_BACKEND_URL;
 const AdminDashboard = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ const filteredTeams = teams.filter((team) =>
     const fetchTeams = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${API_BASE_URL}/teams`);
+        const res = await fetch(`${BACKEND_URL}/api/teams`);
         const data = await res.json();
 
         if (!data.success) {

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../components/Navbar";
+import { complex } from 'framer-motion';
 const Registration = () => {
   const navigate = useNavigate();
+  const BACKEND_URL = import.meta.env.VERCEL_BACKEND_URL;
   const [formData, setFormData] = useState({
     teamName: '',
     leaderName: '',
@@ -80,7 +82,7 @@ const Registration = () => {
 
 
     try {
-      const response = await fetch('http://localhost:5000/api/teams/register', {
+      const response = await fetch(`${BACKEND_URL}/api/teams/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -18,4 +18,7 @@ export default defineConfig({
     host: '0.0.0.0', // Make it accessible to all devices in your network
   },
   base:process.env.VITE_BASE_PATH || "/",
+   build: {
+    outDir: 'build'
+  }
 })

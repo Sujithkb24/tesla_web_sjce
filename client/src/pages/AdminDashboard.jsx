@@ -20,7 +20,7 @@ const filteredTeams = teams.filter((team) =>
     const fetchTeams = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${BACKEND_URL}/api/teams`);
+        const res = await fetch("https://tesla-web-sjce-hljz.vercel.app/api/teams");
         const data = await res.json();
 
         if (!data.success) {

@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import { complex } from 'framer-motion';
 const Registration = () => {
   const navigate = useNavigate();
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const BACKEND_URL = "http://localhost:5000";
   const [formData, setFormData] = useState({
     teamName: '',
     leaderName: '',
@@ -79,7 +79,7 @@ const Registration = () => {
     setSuccess("Registered successfully!");
     setShowModal(true);
 
-
+    console.log('Form Data Submitted:', formData); // Debug log
 
     try {
       const response = await fetch(`${BACKEND_URL}/api/teams/register`, {
@@ -92,9 +92,10 @@ const Registration = () => {
       });
 
       const result = await response.json();
-
+console.log('Registration Success:', result.data);
       if (result.success) {
         setSuccess('Team registered successfully!');
+        console.log('Registration Success:', result.data);
       } else {
         setErrors({ submit: result.message || 'Registration failed' });
       }

@@ -21,6 +21,7 @@ import BlogPost from "./pages/BlogPost";
 import ScrollToTop from "./components/ScrollToTop";
 import Registration from "./pages/Registration";
 import AdminDashboard from "./pages/AdminDashboard";
+import DeptOfEEE from "./components/DeptOfEEE";
 
 function App() {
   // const [array, setArray] = useState([]);
@@ -57,6 +58,7 @@ function App() {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/Admin" element={<AdminRoute />} />
+          <Route path="/about/EEE" element={<DeptOfEEE />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />

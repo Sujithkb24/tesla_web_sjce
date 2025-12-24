@@ -1,8 +1,10 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
+import { useNavigate } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 const AboutUs = () => {
+  const navigate = useNavigate();
   return (
     <div
       className="w-full min-h-screen bg-black text-white overflow-x-hidden"
@@ -88,15 +90,58 @@ const AboutUs = () => {
           </div>
 
           {/* Left-aligned */}
-          <div className="flex flex-col items-start w-full mt-8">
-            <div className="border-t w-full md:w-1/2" style={{ borderColor: "var(--color-gray)" }}></div>
-            <p className="text-xl w-full md:w-1/2 mt-2">
-              Department of Electrical and Electronics Engineering
-            </p>
-            <div className="border-t w-full md:w-1/2 mt-4" style={{ borderColor: "var(--color-gray)" }}></div>
-          </div>
+         <div
+      onClick={() => navigate("/about/EEE")}
+      className="
+        group cursor-pointer flex flex-col items-start w-full mt-8
+        transition-all duration-300 ease-in-out
+        hover:translate-x-1
+      "
+    >
+      {/* Top Line */}
+      <div
+        className="
+          border-t w-full md:w-1/2
+          transition-all duration-300
+          group-hover:border-black
+        "
+        style={{ borderColor: "var(--color-gray)" }}
+      ></div>
+
+      {/* Text */}
+      <p
+        className="
+          text-xl w-full md:w-1/2 mt-2
+          transition-colors duration-300
+          group-hover:text-[#c9a154]
+        "
+      >
+        Department of Electrical and Electronics Engineering<ArrowUpRight
+          size={18}
+          className="
+             translate-x-[-4px]
+            transition-all duration-300
+            text-white
+          "
+        />
+      </p>
+             {/* Link Icon */}
+      
+      {/* Bottom Line */}
+      <div
+        className="
+          border-t w-full md:w-1/2 mt-4
+          transition-all duration-300
+          group-hover:border-black
+        "
+        style={{ borderColor: "var(--color-gray)" }}
+      ></div>
+    </div>
         </div>
 
+        
+
+        
         {/* ACTIVITIES */}
         <div className="mt-12">
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "var(--color-gold)" }}>

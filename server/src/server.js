@@ -20,7 +20,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 // ✅ Database connection
-connectDB();
+(async () => {
+  try {
+    await connectDB();
+  } catch (error) {
+    console.error('Failed to connect to DB:', error.message);
+  }
+})();
 
 // ✅ MOUNT ROUTES PROPERLY
 app.use('/api/quiz', quizRoutes); // ✅ quizRoutes object
@@ -45,3 +51,5 @@ app.listen(PORT, () => {
   console.log(`🔗 Quiz API: http://localhost:${PORT}/api/quiz/register`);
   console.log(`🧪 Test: http://localhost:${PORT}/api/test`);
 });
+
+module.exports = app;

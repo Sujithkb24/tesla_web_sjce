@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 
 const Registration = () => {
   const navigate = useNavigate();
-  const BACKEND_URL = "http://localhost:5000";
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ;
   
   const [formData, setFormData] = useState({
     name: '',

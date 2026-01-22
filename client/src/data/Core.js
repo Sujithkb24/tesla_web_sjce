@@ -1,4 +1,3 @@
-
 const teams = [
   {
     image: "/Tesla_photos/Core/Charan.webp",
@@ -29,23 +28,23 @@ const teams = [
     id: 4,
   },
   {
-    image: "/Tesla_photos/Core/Harshith.webp",
+    image: "/TeslaMembers26-27/HarshithM.jpeg",
     name: "Harshith M",
     role: "Technical Lead",
     description: "EEE - 3rd Year",
     id: 5,
   },
 
-   {
-    image: "/Tesla_photos/Core/Nishanth.webp",
+  {
+    image: "/TeslaMembers26-27/Nishanth.png",
     name: "Nishanth",
     role: "Program Coordinator Lead",
-    description: "EEE - 3rd Year",
+    description: "CSE - 3rd Year",
     id: 6,
   },
 
   {
-    image: "/Tesla_photos/Core/Punya.webp",
+    image: "/TeslaMembers26-27/PunyaDS.jpeg",
     name: "Punya",
     role: "Program Coordinator Lead",
     description: "EEE - 3rd Year",

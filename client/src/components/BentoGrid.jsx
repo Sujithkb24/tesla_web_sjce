@@ -1,69 +1,137 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const images = [
-  "/Tesla_photos/Bento_Grid_3.webp",
-  "/Tesla_photos/Bento_Grid_2.webp",
+  //"/Tesla_photos/Bento_Grid_3.webp",
   "/Tesla_photos/Bento_Grid_4.webp",
+  "/Tesla_photos/Bento_Grid_2.webp",
+
   "/Tesla_photos/Bento_Grid_1.webp",
   "/Tesla_photos/Bento_Grid_6.webp",
-  "/Tesla_photos/Bento_Grid_7.webp",
+  //"/Tesla_photos/Bento_Grid_7.webp",
   "/Tesla_photos/Bento_Grid_5.webp",
   "/Tesla_photos/Tesla_group.webp",
-  "/Tesla_photos/Bento_Grid_8.webp"
+  "/Tesla_photos/Bento_Grid_8.webp",
+  "/Tesla_photos/TeamPhoto2026-27.JPG",
 ];
 
-export default function BentoGrid() {
+export default function TeslaLegacySlider() {
+  const [index, setIndex] = useState(0);
+
+  // slideshow: play → stop → restart
+  useEffect(() => {
+    let timer;
+
+    if (index < images.length - 1) {
+      timer = setTimeout(() => {
+        setIndex(index + 1);
+      }, 3500);
+    } else {
+      timer = setTimeout(() => {
+        setIndex(0);
+      }, 2000);
+    }
+
+    return () => clearTimeout(timer);
+  }, [index]);
+
   return (
-    <div 
-      className="min-h-screen flex items-center justify-center p-2"
-      style={{ 
-        backgroundColor: "var(--color-bg-black)", 
-        height: "100dvh", 
-        minHeight: "100dvh" 
-      }}
+    <section
+      className="w-full flex flex-col items-center px-4 mt-10 mb-10"
+      style={{ backgroundColor: "var(--color-bg-black)" }}
     >
-      <div 
-        className="p-2 sm:p-4 rounded-xl w-full max-w-[1200px]"
-        style={{ 
-          backgroundColor: "var(--color-bg-slate-200)", 
-          height: "90dvh" 
+      {/* ===== TITLE ===== */}
+      <div className="mb-10 text-center">
+        <h1
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide"
+          style={{
+            color: "var(--color-gold)",
+            textShadow: "0 0 18px rgba(201,161,84,0.45)",
+          }}
+        >
+          The Tesla Legacy
+        </h1>
+
+        {/* Divider */}
+        <div
+          className="mx-auto mt-4 h-[3px] w-24"
+          style={{ backgroundColor: "var(--color-gold)" }}
+        />
+      </div>
+
+      {/* ===== SLIDER ===== */}
+      <div
+        className="
+          relative
+          w-full
+          sm:w-[95%]
+          lg:w-[80%]
+          h-[50vh]
+          sm:h-[65vh]
+          lg:h-[75vh]
+          rounded-2xl
+          overflow-hidden
+        "
+        style={{
+          backgroundColor: "var(--color-bg-slate-200)",
+          boxShadow: "0 0 40px rgba(201,161,84,0.35)",
         }}
       >
-        <div className="grid grid-cols-4 grid-rows-4 gap-2 sm:gap-4 w-full h-full">
-          {/* Row 1 */}
-          <div className="col-span-2 row-span-1 rounded-lg overflow-hidden">
-            <img src={images[0]} alt="" className="w-full h-full object-cover" />
-          </div>
-          <div className="col-span-1 row-span-1 rounded-lg overflow-hidden">
-            <img src={images[1]} alt="" className="w-full h-full object-cover" />
-          </div>
-          <div className="col-span-1 row-span-2 rounded-lg overflow-hidden">
-            <img src={images[2]} alt="" className="w-full h-full object-cover" />
-          </div>
+        {/* Slides */}
+        {images.map((img, i) => (
+          <img
+            key={i}
+            src={img}
+            alt={`Tesla slide ${i + 1}`}
+            className={`
+              absolute inset-0
+              w-full h-full
+              object-cover
+              transition-opacity duration-700 ease-in-out
+              ${i === index ? "opacity-100" : "opacity-0"}
+            `}
+          />
+        ))}
 
-          {/* Row 2 */}
-          <div className="col-span-1 row-span-1 rounded-lg overflow-hidden">
-            <img src={images[3]} alt="" className="w-full h-full object-cover" />
-          </div>
-          <div className="col-span-2 row-span-2 rounded-lg overflow-hidden">
-            <img src={images[4]} alt="" className="w-full h-full object-cover" />
-          </div>
+        {/* Left Arrow */}
+        <button
+          onClick={() => setIndex((index - 1 + images.length) % images.length)}
+          className="
+            absolute left-4 top-1/2 -translate-y-1/2
+            bg-black/60 text-white
+            px-3 py-2 rounded-full
+            hover:bg-black/80 transition
+          "
+        >
+          ‹
+        </button>
 
-          {/* Row 3 */}
-          <div className="col-span-1 row-span-2 rounded-lg overflow-hidden">
-            <img src={images[5]} alt="" className="w-full h-full object-cover" />
-          </div>
-          <div className="col-span-1 row-span-2 rounded-lg overflow-hidden">
-            <img src={images[6]} alt="" className="w-full h-full object-cover" />
-          </div>
-          <div className="col-span-1 row-span-1 rounded-lg overflow-hidden">
-            <img src={images[7]} alt="" className="w-full h-full object-cover" />
-          </div>
-          <div className="col-span-1 row-span-1 rounded-lg overflow-hidden">
-            <img src={images[8]} alt="" className="w-full h-full object-cover" />
-          </div>
+        {/* Right Arrow */}
+        <button
+          onClick={() => setIndex((index + 1) % images.length)}
+          className="
+            absolute right-4 top-1/2 -translate-y-1/2
+            bg-black/60 text-white
+            px-3 py-2 rounded-full
+            hover:bg-black/80 transition
+          "
+        >
+          ›
+        </button>
+
+        {/* Dots */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+          {images.map((_, i) => (
+            <span
+              key={i}
+              onClick={() => setIndex(i)}
+              className={`
+                h-2.5 w-2.5 rounded-full cursor-pointer transition
+                ${i === index ? "bg-[#c9a154]" : "bg-white/40"}
+              `}
+            />
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

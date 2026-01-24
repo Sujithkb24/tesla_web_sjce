@@ -19,49 +19,70 @@ const ElectroSection = () => {
         transition={{ duration: 1.5, ease: "easeOut" }}
       >
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat w-full h-full"
-          style={{ backgroundImage: "url('/TeamPhoto.jpg')" }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat w-full h-full scale-105"
+          style={{
+            backgroundImage: "url('/Tesla_photos/TeamPhoto2026-27.JPG')",
+          }}
         />
       </motion.div>
 
-      {/* Concave Arc Overlay */}
+      {/* Concave Arc / Gradient Overlay */}
       <motion.div
         className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(
-              ellipse 100% 100% at 50% 100%,
-              rgba(0, 0, 0, 0) 30%,
-              rgba(0, 0, 0, 0) 40%,
-              rgba(0, 0, 0, 0.5) 50%,
-              rgba(0, 0, 0, 0.7) 60%,
-              rgba(0, 0, 0, 1) 70%,
-              rgba(0, 0, 0, 1) 100%
-            )`
+      linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.2) 40%,
+        rgba(0,0,0,0.25) 70%,
+        rgba(0,0,0,0.25) 100%
+      )
+    `,
         }}
       />
 
       {/* Content Section */}
-      <div className="relative z-10 text-center px-4 sm:px-6 pt-12 sm:pt-16 max-w-3xl flex-shrink-0 mt-10">
+      <div className="relative z-10 text-center px-4 sm:px-6 pt-14 sm:pt-18 max-w-3xl flex-shrink-0 mt-12">
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-wide"
-          style={{ color: "var(--color-gold)" }}
+          className="
+      text-4xl sm:text-5xl md:text-6xl
+      font-extrabold
+      tracking-[0.25em]
+      leading-none
+    "
+          style={{
+            color: "var(--color-gold)",
+            textShadow: "0 0 22px rgba(201,161,84,0.4)",
+          }}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
         >
           ELECTROVAGANZA
         </motion.h1>
 
-        <motion.p
-          className="text-base sm:text-lg md:text-xl mt-3 sm:mt-4 leading-relaxed line-clamp-3 sm:line-clamp-none"
-          style={{ color: "var(--color-white)" }}
+        {/* <motion.p
+          className="
+      mt-5
+      text-sm sm:text-base md:text-lg
+      leading-relaxed
+      text-zinc-200
+      tracking-wide
+    "
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.12 }}
         >
-          Our annual flagship fest, Electrovaganza brings together the excitement of cultural performances and the spirit of innovation. With a vibrant mix of technical contests, fun challenges, and creative showcases, it's a celebration of all things electrical and beyond.
-        </motion.p>
+          Our annual flagship fest,{" "}
+          <span className="text-[var(--color-gold)] font-semibold">
+            Electrovaganza
+          </span>{" "}
+          brings together the excitement of cultural performances and the spirit
+          of innovation. With a vibrant mix of technical contests, fun
+          challenges, and creative showcases, it’s a celebration of all things
+          electrical and beyond.
+        </motion.p> */}
       </div>
 
       {/* Spacer to push content apart */}
@@ -84,7 +105,8 @@ const ElectroSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = "var(--color-light-gold)")
+              (e.currentTarget.style.backgroundColor =
+                "var(--color-light-gold)")
             }
             onMouseLeave={(e) =>
               (e.currentTarget.style.backgroundColor = "var(--color-gold)")

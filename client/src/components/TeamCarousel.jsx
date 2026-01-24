@@ -121,7 +121,7 @@ const TeamCarousel = () => {
 
                   <div className="absolute inset-0 bg-black/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                  <div className="absolute bottom-0 z-10 w-full translate-y-10 p-5 text-center transition-all duration-300 group-hover:translate-y-0">
+                  <div className="absolute bottom-0 z-10 w-full translate-y-10 p-5 mb-5 text-center transition-all duration-300 group-hover:translate-y-0">
                     <h3
                       className="text-xl font-semibold"
                       style={{ color: "var(--color-gold)" }}
@@ -133,7 +133,7 @@ const TeamCarousel = () => {
                       {team.role}
                     </p>
 
-                    <p className="text-xs text-zinc-400">{team.description}</p>
+                    <p className="text-xs  text-zinc-400">{team.description}</p>
 
                     <div
                       className="mx-auto mt-3 h-[2px] w-12"
@@ -176,7 +176,7 @@ const TeamCarousel = () => {
 
                   <div className="absolute inset-0 bg-black/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                  <div className="absolute bottom-0 z-10 w-full translate-y-10 p-5 text-center transition-all duration-300 group-hover:translate-y-0">
+                  <div className="absolute bottom-0 z-10 w-full mb-5 translate-y-10 p-5 text-center transition-all duration-300 group-hover:translate-y-0">
                     <h3
                       className="text-xl font-semibold"
                       style={{ color: "var(--color-gold)" }}
@@ -188,7 +188,7 @@ const TeamCarousel = () => {
                       {team.role}
                     </p>
 
-                    <p className="mt-3 text-xs text-zinc-400">
+                    <p className=" text-xs text-zinc-400">
                       {team.description}
                     </p>
 

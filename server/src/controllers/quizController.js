@@ -1,20 +1,14 @@
 const QuizRegistration = require('../models/QuizRegistration');
 
-exports.registerQuizParticipant = async (req, res) => {
+exports.registerQuizParticipant = async (req, res, next) => {
   try {
     const {
-      name,
-      email,
-      contactNumber,
-      usn,
-      branch,
-      year,
-      attendedBefore
+      name, email, contactNumber, usn, branch, year, attendedBefore
     } = req.body;
 
-    console.log('Quiz Registration Data:', req.body);
+    console.log('📝 Quiz Registration Data:', req.body);
 
-    // Manual validation
+    // Validation
     if (!name?.trim() || !email?.trim() || !contactNumber?.trim() || 
         !usn?.trim() || !branch || year === undefined || attendedBefore === undefined) {
       return res.status(400).json({
@@ -23,8 +17,27 @@ exports.registerQuizParticipant = async (req, res) => {
       });
     }
 
-    // Check if USN already exists
-    const existingUSN = await QuizRegistration.findOne({ usn: usn.toUpperCase().trim() });
+    // Email validation
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!emailRegex.test(email.trim())) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid email format'
+      });
+    }
+
+    // Phone validation
+    if (!/^[0-9]{10}$/.test(contactNumber.trim())) {
+      return res.status(400).json({
+        success: false,
+        message: 'Phone number must be 10 digits'
+      });
+    }
+
+    // Check duplicate USN
+    const existingUSN = await QuizRegistration.findOne({ 
+      usn: usn.toUpperCase().trim() 
+    });
     if (existingUSN) {
       return res.status(400).json({
         success: false,
@@ -32,7 +45,7 @@ exports.registerQuizParticipant = async (req, res) => {
       });
     }
 
-    // Create new registration
+    // Create registration
     const newRegistration = new QuizRegistration({
       name: name.trim(),
       email: email.trim().toLowerCase(),
@@ -44,49 +57,29 @@ exports.registerQuizParticipant = async (req, res) => {
     });
 
     const savedRegistration = await newRegistration.save();
-
-    console.log('Quiz Registration Success:', savedRegistration);
+    console.log('✅ Quiz Registration Success:', savedRegistration._id);
 
     res.status(201).json({
       success: true,
       message: 'Successfully registered for the quiz!',
-      data: savedRegistration
+      data: {
+        id: savedRegistration._id,
+        name: savedRegistration.name,
+        usn: savedRegistration.usn
+      }
     });
 
   } catch (error) {
-    console.error('Quiz Registration Error:', error);
-    
-    if (error.name === 'ValidationError') {
-      const messages = Object.values(error.errors)
-        .map(err => err.message)
-        .join(', ');
-      return res.status(400).json({
-        success: false,
-        message: 'Validation Error',
-        errors: messages
-      });
-    }
-
-    if (error.code === 11000) {
-      return res.status(400).json({
-        success: false,
-        message: 'This USN is already registered'
-      });
-    }
-
-    res.status(500).json({
-      success: false,
-      message: 'Server error during registration',
-      error: error.message
-    });
+    console.error('❌ Quiz Registration Error:', error);
+    next(error); // Pass to global error handler
   }
 };
 
-exports.getAllRegistrations = async (req, res) => {
+exports.getAllRegistrations = async (req, res, next) => {
   try {
     const registrations = await QuizRegistration.find()
       .sort({ createdAt: -1 })
-      .select('-__v'); // Hide version field
+      .select('-__v');
 
     res.status(200).json({
       success: true,
@@ -94,15 +87,12 @@ exports.getAllRegistrations = async (req, res) => {
       data: registrations
     });
   } catch (error) {
-    console.error('Get All Registrations Error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error fetching registrations'
-    });
+    console.error('Get registrations error:', error);
+    next(error);
   }
 };
 
-exports.getParticipantById = async (req, res) => {
+exports.getParticipantById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const participant = await QuizRegistration.findById(id);
@@ -119,18 +109,17 @@ exports.getParticipantById = async (req, res) => {
       data: participant
     });
   } catch (error) {
-    console.error('Get Participant Error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error fetching participant'
-    });
+    console.error('Get participant error:', error);
+    next(error);
   }
 };
 
-exports.checkUSN = async (req, res) => {
+exports.checkUSN = async (req, res, next) => {
   try {
     const { usn } = req.params;
-    const existing = await QuizRegistration.findOne({ usn: usn.toUpperCase() });
+    const existing = await QuizRegistration.findOne({ 
+      usn: usn.toUpperCase().trim() 
+    });
 
     res.status(200).json({
       success: true,
@@ -138,10 +127,7 @@ exports.checkUSN = async (req, res) => {
       message: existing ? 'USN already registered' : 'USN available'
     });
   } catch (error) {
-    console.error('Check USN Error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error checking USN'
-    });
+    console.error('Check USN error:', error);
+    next(error);
   }
 };

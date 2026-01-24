@@ -19,7 +19,6 @@ const Registration = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [success, setSuccess] = useState("");
 
   const branches = [
     "CSE",
@@ -43,12 +42,11 @@ const Registration = () => {
     mode: "Online (Slido)",
   };
 
+  // Simplified handleChange - no more broken placeholder logic
   const handleChange = (e) => {
-    const { name, value, type, checked, placeholder } = e.target;
-
-    let fieldName = name;
+    const { name, value, type, checked } = e.target;
+    
     let newValue;
-
     if (type === "radio") {
       newValue = value === "true";
     } else if (type === "checkbox") {
@@ -57,27 +55,16 @@ const Registration = () => {
       newValue = value;
     }
 
-    if (name === "name") {
-      if (placeholder?.toLowerCase().includes("full name")) {
-        fieldName = "name";
-      } else if (placeholder?.toLowerCase().includes("usn")) {
-        fieldName = "usn";
-      } else if (placeholder?.toLowerCase().includes("email")) {
-        fieldName = "email";
-      } else if (placeholder?.toLowerCase().includes("x")) {
-        fieldName = "contactNumber";
-      }
-    }
-
     setFormData((prev) => ({
       ...prev,
-      [fieldName]: newValue,
+      [name]: newValue,
     }));
 
-    if (errors[fieldName]) {
+    // Clear field error on change
+    if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
-        [fieldName]: "",
+        [name]: "",
       }));
     }
   };
@@ -87,9 +74,7 @@ const Registration = () => {
 
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (
-      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.email)
-    )
+    else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.email))
       newErrors.email = "Invalid email format";
 
     if (!formData.contactNumber.trim())
@@ -98,7 +83,6 @@ const Registration = () => {
       newErrors.contactNumber = "Phone must be 10 digits";
 
     if (!formData.usn.trim()) newErrors.usn = "USN is required";
-
     if (!formData.branch) newErrors.branch = "Branch is required";
     if (!formData.year) newErrors.year = "Year is required";
 
@@ -111,7 +95,7 @@ const Registration = () => {
     if (!validateForm()) return;
 
     setLoading(true);
-    setSuccess("");
+    setErrors({}); // Clear previous errors
 
     try {
       const response = await fetch(`${BACKEND_URL}/api/quiz/register`, {
@@ -126,7 +110,6 @@ const Registration = () => {
       const result = await response.json();
 
       if (result.success) {
-        setSuccess("Successfully registered for the quiz!");
         setShowModal(true);
       } else {
         setErrors({ submit: result.message || "Registration failed" });
@@ -144,13 +127,12 @@ const Registration = () => {
 
       {/* Hero Section */}
       <section
-  className="relative w-full border-b border-[#c9a154]/30 bg-cover bg-center"
-  style={{
-    backgroundImage:
-      "linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('/EVJAN.jpg')",
-  }}
->
-
+        className="relative w-full border-b border-[#c9a154]/30 bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('/EVJAN.jpg')",
+        }}
+      >
         {/* Subtle gold glow */}
         <div className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#c9a154]/10 blur-[120px]" />
 
@@ -158,7 +140,7 @@ const Registration = () => {
           {/* LEFT CONTENT */}
           <div className="relative">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-center lg:text-left mb-4">
-              Emerging technologies {" "}
+              Emerging technologies{" "}
               <span className="text-[#c9a154] relative">
                 in EV's
                 <span className="absolute left-0 -bottom-2 h-[3px] w-full bg-[#c9a154]/70" />
@@ -211,7 +193,6 @@ const Registration = () => {
                   "Open to all engineering students",
                   "20 questions",
                   "E-certificates will be provided to participants scoring 50% and above",
-              
                 ].map((rule, i) => (
                   <li key={i} className="flex gap-3 items-start">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#c9a154]" />
@@ -238,11 +219,8 @@ const Registration = () => {
             </p>
           </div>
 
-          <div className="border border-zinc-900 bg-zinc-950/80 rounded-3xl p-5 sm:p-6 md:p-8 lg:p-10 ">
-            <form
-              onSubmit={handleSubmit}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8"
-            >
+          <div className="border border-zinc-900 bg-zinc-950/80 rounded-3xl p-5 sm:p-6 md:p-8 lg:p-10">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
               {/* Personal Info */}
               <div className="lg:col-span-2">
                 <div className="rounded-2xl border border-zinc-900 bg-black/70 p-5 sm:p-6 md:p-8 space-y-6 hover:shadow-[0_0_20px_rgba(201,161,84,0.35)]">
@@ -252,147 +230,80 @@ const Registration = () => {
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Full Name */}
                     <div className="flex flex-col">
-                      <label className="label-dark text-lg mb-1">
-                        Full Name *
-                      </label>
-
+                      <label className="label-dark text-lg mb-1">Full Name *</label>
                       <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Enter your full name"
-                        className="
-    input-field-dark
-    px-3 py-2
-    rounded-lg
-    border border-amber-200/40
-    outline-none
-    transition-colors duration-200
-    focus:border-amber-300
-    focus:ring-1 focus:ring-amber-300/50
-  "
+                        className="input-field-dark px-3 py-2 rounded-lg border border-amber-200/40 outline-none transition-colors duration-200 focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50"
                       />
-
                       {errors.name && (
-                        <p className="text-red-400 mt-1 text-xs font-semibold">
-                          {errors.name}
-                        </p>
+                        <p className="text-red-400 mt-1 text-xs font-semibold">{errors.name}</p>
                       )}
                     </div>
 
+                    {/* USN */}
                     <div className="flex flex-col">
                       <label className="label-dark text-lg mb-1">USN *</label>
-
                       <input
                         type="text"
-                        name="name"
+                        name="usn"
                         value={formData.usn}
                         onChange={handleChange}
                         placeholder="Enter your USN"
-                        className="
-    input-field-dark
-    px-3 py-2
-    rounded-lg
-    border border-amber-200/40
-    outline-none
-    transition-colors duration-200
-    focus:border-amber-300
-    focus:ring-1 focus:ring-amber-300/50
-  "
+                        className="input-field-dark px-3 py-2 rounded-lg border border-amber-200/40 outline-none transition-colors duration-200 focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50"
                       />
-
                       {errors.usn && (
-                        <p className="text-red-400 mt-1 text-xs font-semibold">
-                          {errors.usn}
-                        </p>
+                        <p className="text-red-400 mt-1 text-xs font-semibold">{errors.usn}</p>
                       )}
                     </div>
 
+                    {/* Email */}
                     <div className="flex flex-col">
                       <label className="label-dark text-lg mb-1">Email *</label>
-
                       <input
-                        type="text"
-                        name="name"
+                        type="email"
+                        name="email"
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="Enter your email"
-                        className="
-    input-field-dark
-    px-3 py-2
-    rounded-lg
-    border border-amber-200/40
-    outline-none
-    transition-colors duration-200
-    focus:border-amber-300
-    focus:ring-1 focus:ring-amber-300/50
-  "
+                        className="input-field-dark px-3 py-2 rounded-lg border border-amber-200/40 outline-none transition-colors duration-200 focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50"
                       />
-
                       {errors.email && (
-                        <p className="text-red-400 mt-1 text-xs font-semibold">
-                          {errors.email}
-                        </p>
+                        <p className="text-red-400 mt-1 text-xs font-semibold">{errors.email}</p>
                       )}
                     </div>
 
+                    {/* Contact Number */}
                     <div className="flex flex-col">
-                      <label className="label-dark text-lg mb-1">
-                        Contact *
-                      </label>
-
+                      <label className="label-dark text-lg mb-1">Contact *</label>
                       <input
-                        type="text"
-                        name="name"
+                        type="tel"
+                        name="contactNumber"
                         value={formData.contactNumber}
                         onChange={handleChange}
                         placeholder="XXXXXXXXXX"
-                        className="
-    input-field-dark
-    px-3 py-2
-    rounded-lg
-    border border-amber-200/40
-    outline-none
-    transition-colors duration-200
-    focus:border-amber-300
-    focus:ring-1 focus:ring-amber-300/50
-  "
+                        className="input-field-dark px-3 py-2 rounded-lg border border-amber-200/40 outline-none transition-colors duration-200 focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50"
                       />
-
                       {errors.contactNumber && (
-                        <p className="text-red-400 mt-1 text-xs font-semibold">
-                          {errors.contactNumber}
-                        </p>
+                        <p className="text-red-400 mt-1 text-xs font-semibold">{errors.contactNumber}</p>
                       )}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {/* Branch */}
                     <div className="flex flex-col">
-                      <label className="label-dark text-lg mb-1">
-                        Branch *
-                      </label>
+                      <label className="label-dark text-lg mb-1">Branch *</label>
                       <select
                         name="branch"
                         value={formData.branch}
                         onChange={handleChange}
-                        className="
-    select-field-dark
-    h-11
-    w-full
-    rounded-lg
-    border border-amber-200/40
-    bg-zinc-950
-    px-3
-    text-sm text-zinc-100
-    outline-none
-    transition-all duration-200
-     
-    focus:border-amber-300
-    focus:ring-1 focus:ring-amber-300/50
-  "
+                        className="select-field-dark h-11 w-full rounded-lg border border-amber-200/40 bg-zinc-950 px-3 text-sm text-zinc-100 outline-none transition-all duration-200 focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50"
                       >
                         <option value="">Select Branch</option>
                         {branches.map((branch) => (
@@ -402,32 +313,18 @@ const Registration = () => {
                         ))}
                       </select>
                       {errors.branch && (
-                        <p className="text-red-400 mt-1 text-xs font-semibold">
-                          {errors.branch}
-                        </p>
+                        <p className="text-red-400 mt-1 text-xs font-semibold">{errors.branch}</p>
                       )}
                     </div>
 
+                    {/* Year */}
                     <div className="flex flex-col">
                       <label className="label-dark text-lg mb-1">Year *</label>
                       <select
                         name="year"
                         value={formData.year}
                         onChange={handleChange}
-                        className="
-    select-field-dark
-    h-11
-    w-full
-    rounded-lg
-    border border-amber-200/40
-    bg-zinc-950
-    px-3
-    text-sm text-zinc-100
-    outline-none
-    transition-all duration-200
-     
-    focus:border-amber-300
-    focus:ring-1 focus:ring-amber-300/50"
+                        className="select-field-dark h-11 w-full rounded-lg border border-amber-200/40 bg-zinc-950 px-3 text-sm text-zinc-100 outline-none transition-all duration-200 focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50"
                       >
                         <option value="">Select Year</option>
                         {years.map((year) => (
@@ -437,21 +334,16 @@ const Registration = () => {
                         ))}
                       </select>
                       {errors.year && (
-                        <p className="text-red-400 mt-1 text-xs font-semibold">
-                          {errors.year}
-                        </p>
+                        <p className="text-red-400 mt-1 text-xs font-semibold">{errors.year}</p>
                       )}
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Question */}
+              {/* Attended Before Question */}
               <div className="lg:col-span-2">
-                <div
-                  className="rounded-2xl border border-zinc-900 bg-black/70 p-5 sm:p-6 md:p-8 space-y-4 hover:shadow-[0_0_20px_rgba(201,161,84,0.35)]
-"
-                >
+                <div className="rounded-2xl border border-zinc-900 bg-black/70 p-5 sm:p-6 md:p-8 space-y-4 hover:shadow-[0_0_20px_rgba(201,161,84,0.35)]">
                   <h3 className="text-lg sm:text-xl font-bold">
                     Have you attended this quiz before?
                   </h3>
@@ -464,8 +356,7 @@ const Registration = () => {
                         value="true"
                         checked={formData.attendedBefore === true}
                         onChange={handleChange}
-                        className="w-5 h-5 accent-[#c9a154] text-[#c9a154] focus:border-amber-300
-    focus:ring-1 focus:ring-amber-300/50"
+                        className="w-5 h-5 accent-[#c9a154] text-[#c9a154] focus:border-amber-300 focus:ring-1 focus:ring-amber-300/50"
                       />
                       <span className="text-sm font-medium text-zinc-200 group-hover:text-white">
                         Yes
@@ -489,25 +380,17 @@ const Registration = () => {
                 </div>
               </div>
 
-              {/* Submit */}
+              {/* Submit Section */}
               <div className="lg:col-span-2 flex flex-col sm:flex-row gap-4 pt-2">
                 {errors.submit && (
                   <div className="flex-1 px-4 py-3 rounded-2xl border border-red-500/60 bg-red-950/40 text-red-200 text-center text-sm font-semibold">
                     {errors.submit}
                   </div>
                 )}
-                {success && (
-                  <div className="flex-1 px-4 py-3 rounded-2xl border border-emerald-500/60 bg-emerald-950/40 text-emerald-200 text-center text-sm font-semibold animate-pulse">
-                    {success}
-                  </div>
-                )}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 inline-flex items-center justify-center px-6 py-3.5 rounded-2xl font-extrabold text-xs sm:text-sm md:text-base tracking-[0.16em] uppercase
-                    bg-[#c9a154] text-black hover:bg-[#d9b76a]
-                    disabled:opacity-60 disabled:cursor-not-allowed
-                    transition-colors border border-transparent shadow-lg hover:shadow-[#c9a154]/25"
+                  className="flex-1 inline-flex items-center justify-center px-6 py-3.5 rounded-2xl font-extrabold text-xs sm:text-sm md:text-base tracking-[0.16em] uppercase bg-[#c9a154] text-black hover:bg-[#d9b76a] disabled:opacity-60 disabled:cursor-not-allowed transition-colors border border-transparent shadow-lg hover:shadow-[#c9a154]/25"
                 >
                   {loading ? (
                     <>
@@ -523,12 +406,12 @@ const Registration = () => {
                           r="10"
                           stroke="currentColor"
                           strokeWidth="4"
-                        ></circle>
+                        />
                         <path
                           className="opacity-75"
                           fill="currentColor"
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
+                        />
                       </svg>
                       Registering…
                     </>
@@ -574,67 +457,6 @@ const Registration = () => {
           </div>
         )}
       </section>
-
-      <style jsx>{`
-        .input-field-dark {
-          @apply w-full px-4 py-2.5 sm:py-3 bg-zinc-950 border border-zinc-800 rounded-xl
-    text-sm sm:text-base text-white placeholder-zinc-500
-    focus:outline-none focus:ring-2 focus:ring-[#c9a154] focus:border-[#c9a154]
-    transition-all duration-200;
-        }
-        .input-field-dark:focus {
-          box-shadow: 0 0 0 1px rgba(201, 161, 84, 0.4);
-        }
-
-        /* ✅ FIXED DARK THEME DROPDOWN */
-        .select-field-dark {
-          @apply w-full rounded-lg bg-zinc-900 border border-zinc-700 
-    px-3 py-2.5 sm:py-3 text-sm sm:text-base text-zinc-100 
-    focus:outline-none focus:ring-2 focus:ring-[#c9a154] focus:border-transparent 
-    transition-all duration-200 cursor-pointer;
-        }
-
-        /* ✅ CRITICAL: Dark dropdown options */
-        .select-field-dark optgroup,
-        .select-field-dark option {
-          background-color: #18181b !important; /* zinc-950 */
-          color: #f4f4f5 !important; /* zinc-100 */
-          padding: 8px 12px;
-        }
-
-        /* ✅ Hover effect for options */
-        .select-field-dark option:hover {
-          background-color: #27272a !important; /* zinc-800 */
-          color: #ffffff !important;
-        }
-
-        .select-field-dark option:checked {
-          background-color: #c9a154 !important; /* Gold accent */
-          color: #000000 !important;
-        }
-
-        .select-field-dark:focus {
-          box-shadow: 0 0 0 1px rgba(201, 161, 84, 0.4);
-        }
-
-        .label-dark {
-          @apply block text-xs sm:text-[0.7rem] font-semibold uppercase tracking-wide text-zinc-400 mb-1.5;
-        }
-
-        @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-        .animate-scaleIn {
-          animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-      `}</style>
     </div>
   );
 };

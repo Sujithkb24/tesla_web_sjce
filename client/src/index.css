@@ -172,3 +172,61 @@ html, body {
   }
 }
 
+ .input-field-dark {
+          @apply w-full px-4 py-2.5 sm:py-3 bg-zinc-950 border border-zinc-800 rounded-xl
+    text-sm sm:text-base text-white placeholder-zinc-500
+    focus:outline-none focus:ring-2 focus:ring-[#c9a154] focus:border-[#c9a154]
+    transition-all duration-200;
+        }
+        .input-field-dark:focus {
+          box-shadow: 0 0 0 1px rgba(201, 161, 84, 0.4);
+        }
+
+        /* ✅ FIXED DARK THEME DROPDOWN */
+        .select-field-dark {
+          @apply w-full rounded-lg bg-zinc-900 border border-zinc-700 
+    px-3 py-2.5 sm:py-3 text-sm sm:text-base text-zinc-100 
+    focus:outline-none focus:ring-2 focus:ring-[#c9a154] focus:border-transparent 
+    transition-all duration-200 cursor-pointer;
+        }
+
+        /* ✅ CRITICAL: Dark dropdown options */
+        .select-field-dark optgroup,
+        .select-field-dark option {
+          background-color: #18181b !important; /* zinc-950 */
+          color: #f4f4f5 !important; /* zinc-100 */
+          padding: 8px 12px;
+        }
+
+        /* ✅ Hover effect for options */
+        .select-field-dark option:hover {
+          background-color: #27272a !important; /* zinc-800 */
+          color: #ffffff !important;
+        }
+
+        .select-field-dark option:checked {
+          background-color: #c9a154 !important; /* Gold accent */
+          color: #000000 !important;
+        }
+
+        .select-field-dark:focus {
+          box-shadow: 0 0 0 1px rgba(201, 161, 84, 0.4);
+        }
+
+        .label-dark {
+          @apply block text-xs sm:text-[0.7rem] font-semibold uppercase tracking-wide text-zinc-400 mb-1.5;
+        }
+
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        .animate-scaleIn {
+          animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }

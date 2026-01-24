@@ -136,7 +136,7 @@ const Registration = () => {
         {/* Subtle gold glow */}
         <div className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#c9a154]/10 blur-[120px]" />
 
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-14 items-center">
+        <div className="max-w-6xl mx-auto px-6 py-20 md:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-14 items-center">
           {/* LEFT CONTENT */}
           <div className="relative">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-center lg:text-left mb-4">
@@ -345,7 +345,7 @@ const Registration = () => {
               <div className="lg:col-span-2">
                 <div className="rounded-2xl border border-zinc-900 bg-black/70 p-5 sm:p-6 md:p-8 space-y-4 hover:shadow-[0_0_20px_rgba(201,161,84,0.35)]">
                   <h3 className="text-lg sm:text-xl font-bold">
-                    Have you attended this quiz before?
+                    Have you attended our monthly quiz before?
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">

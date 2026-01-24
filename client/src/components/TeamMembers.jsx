@@ -261,6 +261,7 @@ const TeamMembers = () => {
                   isFlipped={flippedKey === key}
                   onClick={() => toggleFlip(key)}
                 />
+                
               );
             })}
           </div>

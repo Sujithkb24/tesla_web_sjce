@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/quiz', quizRoutes); // ✅ quizRoutes object
 
 // Test route to verify server works
-app.get('/api/test', (req, res) => {
+app.get('/', (req, res) => {
   res.json({ success: true, message: 'Server is running!' });
 });
 

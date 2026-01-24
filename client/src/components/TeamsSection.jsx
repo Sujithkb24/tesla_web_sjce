@@ -34,7 +34,7 @@ const TeamsSection = () => {
       >
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat w-full h-full"
-          style={{ backgroundImage: "url('/Tesla_photos/Tesla_group.webp')" }}
+          style={{ backgroundImage: "url('/Tesla_photos/TeamPhoto2026-27.JPG')" }}
         />
       </motion.div>
 

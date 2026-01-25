@@ -429,12 +429,11 @@ const Registration = () => {
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
             <div className="bg-zinc-900/90 border border-[#c9a154]/40 rounded-2xl p-8 w-11/12 max-w-md shadow-xl animate-scaleIn text-center space-y-4">
               <h2 className="text-2xl md:text-3xl font-extrabold text-[#c9a154]">
-                🎉 Registration Successful!
+              Registration Successful!
               </h2>
               <p className="text-zinc-300 text-sm md:text-base font-medium leading-relaxed">
-                You're all set for the <strong>{quizDetails.theme}</strong>!
-                <br />
-                Join our WhatsApp group for updates.
+                An Email has been sent to your registered email with further details. Make sure to check your inbox (and spam folder just in case).
+                Join our WhatsApp group for updates and reminders.
               </p>
               <a
                 href="https://chat.whatsapp.com/L78MTLXlmiDGy3Ir83fPeH"

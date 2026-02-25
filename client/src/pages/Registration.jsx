@@ -36,8 +36,8 @@ const Registration = () => {
 
   // Quiz Details
   const quizDetails = {
-    theme: "Emerging technologies in EV's",
-    date: "28th JAN, 2026",
+    theme: "Defence Tech: Innovations and Advancements ",
+    date: "28th FEB, 2026",
     time: "7:00 PM",
     mode: "Online (Slido)",
   };
@@ -130,7 +130,7 @@ const Registration = () => {
         className="relative w-full border-b border-[#c9a154]/30 bg-cover bg-center"
         style={{
           backgroundImage:
-            "linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('/EVJAN.jpg')",
+            "linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('/DEFEB.jpg')",
         }}
       >
         {/* Subtle gold glow */}
@@ -140,15 +140,15 @@ const Registration = () => {
           {/* LEFT CONTENT */}
           <div className="relative">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-center lg:text-left mb-4">
-              Emerging technologies{" "}
+              Defence Tech:{" "}
               <span className="text-[#c9a154] relative">
-                in EV's
+                 Innovations and Advancements 
                 <span className="absolute left-0 -bottom-2 h-[3px] w-full bg-[#c9a154]/70" />
               </span>
             </h1>
 
             <p className="uppercase tracking-[0.35em] mb-10 text-center lg:text-left text-xs md:text-sm text-[#c9a154] font-bold">
-              MONTHLY RECURRING QUIZ - JANUARY
+              MONTHLY RECURRING QUIZ - FEBRUARY
             </p>
 
             {/* Quiz Details */}
@@ -175,7 +175,7 @@ const Registration = () => {
           </div>
 
           {/* RIGHT CARD */}
-          <div className="group relative border border-[#c9a154]/30 rounded-2xl p-7 md:p-8 bg-zinc-950/70 backdrop-blur-md shadow-[0_0_40px_-12px_rgba(201,161,84,0.25)] transition-all duration-300 hover:shadow-[0_0_60px_-8px_rgba(201,161,84,0.45)]">
+          <div className="group relative border border-[#c9a154]/30 rounded-2xl p-7 md:p-8 bg-zinc-950/40 backdrop-blur-sm shadow-[0_0_40px_-12px_rgba(201,161,84,0.25)] transition-all duration-300 hover:shadow-[0_0_60px_-8px_rgba(201,161,84,0.45)]">
             {/* Gold top accent */}
             <div className="absolute top-0 left-1/2 h-[3px] w-16 -translate-x-1/2 bg-[#c9a154]" />
 

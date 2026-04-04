@@ -127,21 +127,16 @@ const Registration = () => {
 
       {/* Hero Section */}
       <section className="relative w-full border-b border-[#c9a154]/30">
-        <video
+        <img
           className="absolute inset-0 w-full h-full object-cover z-0"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src="APR11/.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          src="/APR111.jpg"
+          alt="Solar Power and Sustainable Technology"
+        />
 
         {/* Subtle gold glow */}
         <div className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[#c9a154]/10 blur-[120px]" />
 
-        <div className="relative z-10 w-full px-6 py-20 md:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-14 items-center" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.95))" }}>
+        <div className="relative z-10 w-full px-6 py-20 md:py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-14 items-center" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.95))" }}>
           {/* LEFT CONTENT */}
           <div className="relative">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-center lg:text-left mb-4">

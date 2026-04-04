@@ -87,11 +87,11 @@ exports.registerQuizParticipant = async (req, res, next) => {
             <div style="background-color: #111; padding: 20px; border-radius: 8px; border: 1px solid #c9a154; margin-bottom: 20px;">
               <h2 style="color: #c9a154; margin: 0 0 15px 0; font-size: 24px;">🎉 Registration Confirmed!</h2>
               <p style="margin: 10px 0; font-size: 16px;">Hi <strong>${savedRegistration.name}</strong>,</p>
-              <p style="margin: 10px 0; line-height: 1.6;">Thank you for registering for our <strong>Monthly Recurring Quiz</strong> on <strong>Defence Tech: Innovations and Advancements</strong>!</p>
+              <p style="margin: 10px 0; line-height: 1.6;">Thank you for registering for our <strong>Monthly Recurring Quiz</strong> on <strong>Solar Power and Sustainable Technology</strong>!</p>
               
               <div style="background-color: #222; padding: 15px; border-radius: 5px; margin: 20px 0;">
                 <h3 style="color: #c9a154; margin: 0 0 10px 0; font-size: 18px;">Quiz Details:</h3>
-                <p style="margin: 5px 0;"><strong>Date:</strong> 28th FEB, 2026</p>
+                <p style="margin: 5px 0;"><strong>Date:</strong> 6th APR, 2026</p>
                 <p style="margin: 5px 0;"><strong>Time:</strong> 7:00 PM</p>
                 <p style="margin: 5px 0;"><strong>Mode:</strong> Online (Slido)</p>
                 <p style="margin: 5px 0;"><strong>USN:</strong> ${savedRegistration.usn}</p>
